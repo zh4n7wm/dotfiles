@@ -1,5 +1,18 @@
 ## nvim
 
+install neovim
+
+```
+brew install neovim
+```
+
+install fonts
+
+```
+brew tap homebrew/cask-fonts
+brew install font-hack-nerd-font --cask
+```
+
 install packer as nvim package manager
 
 ```
