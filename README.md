@@ -9,7 +9,7 @@ git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvi
 create soft link
 
 ```
-ln -s $(pwd)/dotfiles/nvim ~/.config/nvim
+ln -s $(pwd)/nvim ~/.config/nvim
 ```
 
 install nvim plugins
