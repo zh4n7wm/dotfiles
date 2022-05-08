@@ -6,6 +6,7 @@ require('basic')
 require('keymap')
 require('plug')
 require('cmpconfig')
+-- require('nvim-cmp-config')
 require('lsp')
 require('autocmd')
 require('telescope-files')
@@ -49,10 +50,12 @@ syntax enable
 set background=dark
 " set background=light
 
-let g:gruvbox_material_palette = 'material'
-let g:gruvbox_material_background = 'soft'
-let g:gruvbox_material_better_performance = 1
-colorscheme gruvbox-material
+colorscheme PaperColor
+
+" let g:gruvbox_material_palette = 'material'
+" let g:gruvbox_material_background = 'soft'
+" let g:gruvbox_material_better_performance = 1
+" colorscheme gruvbox-material
 
 " colorscheme dracula
 

@@ -370,10 +370,8 @@ local packer_startup = function(use)
     -- A completion manager that obtains completion data from multiple
     -- sources (LSP, LuaSnip, buffers, etc.) based on plugins included
     -- below. This is the pure-Lua successor of nvim-compe.
-    use { 'hrsh7th/nvim-cmp' }
-
-    -- Completion sources for nvim-cmp.
     use {
+        { 'hrsh7th/nvim-cmp' },
         { 'saadparwaiz1/cmp_luasnip' },
         { 'hrsh7th/cmp-nvim-lsp' },
         { 'hrsh7th/cmp-buffer' },
@@ -444,8 +442,8 @@ local packer_startup = function(use)
     use {
         'tpope/vim-markdown',
         config = function()
-            vim.g.markdown_fenced_languages = {'html', 'python', 'bash=sh'}
-            vim.g.markdown_minlines = 20
+            vim.g.markdown_fenced_languages = {'html', 'javascript', 'typescript', 'css', 'scss', 'python', 'bash=sh', 'go', 'lua', 'vim'}
+            vim.g.markdown_minlines = 100
         end
     }
 
@@ -479,6 +477,7 @@ local packer_startup = function(use)
     }
     -- 快速加入修改环绕字符
     use { 'wellle/targets.vim', 'tpope/vim-surround', 'tpope/vim-repeat', 'mg979/vim-visual-multi' }
+    use { 'tpope/vim-abolish' }
 
     -- 显示、删除行尾空格
     use { 'bronson/vim-trailing-whitespace' }
@@ -837,6 +836,7 @@ local packer_startup = function(use)
     use 'gpanders/editorconfig.nvim'
 
     -- color scheme
+    use { 'NLKNguyen/papercolor-theme' }
     use { 'sainnhe/gruvbox-material' }
     use { 'altercation/vim-colors-solarized' }
     use { 'overcache/NeoSolarized' }

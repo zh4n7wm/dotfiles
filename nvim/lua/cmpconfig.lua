@@ -22,7 +22,6 @@ cmp.setup({
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },
       { name = 'luasnip' },
-      -- { name = 'nvim_lsp_signature_help' },
       {
           name = 'buffer',
           option = {
@@ -49,8 +48,8 @@ cmp.setup({
       -- documentation = cmp.config.window.bordered(),
     },
     mapping = cmp.mapping.preset.insert({
-      ['<C-h>'] = cmp.mapping.scroll_docs(-4),
-      ['<C-l>'] = cmp.mapping.scroll_docs(4),
+      ['<C-u>'] = cmp.mapping.scroll_docs(-4),
+      ['<C-d>'] = cmp.mapping.scroll_docs(4),
       ['<C-j>'] = cmp.mapping.select_next_item(),
       ['<C-k>'] = cmp.mapping.select_prev_item(),
       ['<C-i>'] = cmp.mapping.complete(),
@@ -129,27 +128,6 @@ cmp.setup.cmdline(':', {
     })
 })
 
--- Setup lspconfig.
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-require('lspconfig')['pyright'].setup {
-    capabilities = capabilities
-}
-require('lspconfig')['gopls'].setup {
-    capabilities = capabilities
-}
-
-require('lspconfig').tsserver.setup{}
-require('lspconfig').yamlls.setup{}
-require('lspconfig').ansiblels.setup{}
-require('lspconfig').dockerls.setup{}
-require('lspconfig').awk_ls.setup{}
-require('lspconfig').bashls.setup{}
-require('lspconfig').cssls.setup{}
-require('lspconfig').html.setup{}
-require('lspconfig').solidity_ls.setup{
-  -- [root_dir] = {"**", ".git", "package.json"},
-}
-require('lspconfig').sumneko_lua.setup{}
 -- vim-vsnip
 vim.cmd [[
 " Expand

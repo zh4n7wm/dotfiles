@@ -99,7 +99,7 @@ vim.opt.writebackup = false
 vim.g.grepformat=[[%f:%l:%c:%m,%f:%l:%m,%f:%l%m,%f\ \ %l%m]]
 if vim.fn.executable('ag') then
   vim.g.grepprg=[[ag\ -s\]]
-elseif has('unix') then
+elseif vim.fn.has('unix') == 1 then
   vim.g.grepprg=[[grep\ -rn\ $*\ /dev/null]]
 end
 

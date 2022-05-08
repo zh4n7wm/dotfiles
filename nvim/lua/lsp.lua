@@ -61,4 +61,12 @@ require('lspconfig').html.setup{}
 require('lspconfig').solidity_ls.setup{
     -- [root_dir] = {"**", ".git", "package.json"},
 }
-require('lspconfig').sumneko_lua.setup{}
+require('lspconfig').sumneko_lua.setup{
+    settings = {
+        Lua = {
+            diagnostics = {
+                globals = { 'vim' }
+            }
+        }
+    }
+}
