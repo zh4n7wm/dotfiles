@@ -144,40 +144,10 @@ inoremap <C-t>     <Esc>:tabnew<CR>
 autocmd BufNewFile,BufRead *.py inoremap # X<c-h>#
 ]]
 
-diagnostic_config = {
-    -- Enable underline, use default values
-    underline = true,
-    -- Enable virtual text, override spacing to 2
-    virtual_text = {
-        spacing = 2,
-        prefix = '<',
-    },
-    -- Use a function to dynamically turn signs off
-    -- and on, using buffer local variables
-    signs = function(bufnr, client)
-        local ok, result = pcall(vim.api.nvim_buf_get_var, bufnr, 'show_signs')
-        -- No buffer local variable set, so just enable by default
-        if not ok then
-            return true
-        end
-
-        return result
-    end,
-    -- Disable a feature
-    update_in_insert = false
-}
-
 -- smoothie
 vim.g.smoothie_enabled = true
 map('n', '<C-D>', [[<cmd>call smoothie#do("\<C-D>") <CR>]], {})
 map('n', '<C-U>', [[<cmd>call smoothie#do("\<C-U>") <CR>]], {})
-
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, diagnostic_config)
---- 在 diagnostic 之間跳轉
---- 映射 `[d` `]d` 跳轉到上一個和下一個 diagnostic
---- plain text
-map('n', '<leader>dp', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>',{silent = true, noremap = true})
-map('n', '<leader>dn', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>',{silent = true, noremap = true})
 
 -- nvim-tree
 map("n", "<leader>t", ":NvimTreeToggle<cr>" ,{silent = true, noremap = true})

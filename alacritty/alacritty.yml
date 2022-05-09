@@ -20,13 +20,16 @@ scrolling:
   multiplier: 3
 
 font:
-  size: 20
+  size: 24
   normal:
-    family: Source Code Pro
+    family: SauceCodePro Nerd Font
+    style: Regular
   bold:
-    family: Source Code Pro
+    family: SauceCodePro Nerd Font
+    style: Bold
   italic:
-    family: Source Code Pro
+    family: SauceCodePro Nerd Font
+    style: Italic
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
@@ -101,6 +104,7 @@ mouse:
   double_click: { threshold: 300 }
   triple_click: { threshold: 300 }
   cursor_when_typing: true
+  hide_when_typing: true
 
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>"

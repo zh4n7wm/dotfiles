@@ -43,26 +43,21 @@ local packer_startup = function(use)
     use { 'rust-lang/rust.vim', opt = true }
 
     -- filetype
+    use { 'nathom/filetype.nvim' }
+
+    -- show all the trouble your code is causing
     use {
-        'nathom/filetype.nvim',
-        config = function()
-            vim.g.did_load_filetypes = 1
-            overrides = {
-                complex = {
-                    -- Set the filetype of any full filename matching the regex to gitconfig
-                    [".*git/config"] = "gitconfig", -- Included in the plugin
-                },
-                function_extensions = {
-                    ['py'] = function()
-                        vim.bo.filetype = "py"
-                    end
-                },
-                function_literal = {
-                    Brewfile = function()
-                        vim.cmd("syntax off")
-                    end
-                }
-            }
+        'folke/trouble.nvim',
+        requires = { "kyazdani42/nvim-web-devicons", "neovim/nvim-lspconfig" },
+        config = function ()
+            vim.cmd [[
+            nnoremap <leader>xx <cmd>TroubleToggle<cr>
+            nnoremap <leader>xw <cmd>TroubleToggle workspace_diagnostics<cr>
+            nnoremap <leader>xd <cmd>TroubleToggle document_diagnostics<cr>
+            nnoremap <leader>xq <cmd>TroubleToggle quickfix<cr>
+            nnoremap <leader>xl <cmd>TroubleToggle loclist<cr>
+            nnoremap gR <cmd>TroubleToggle lsp_references<cr>
+            ]]
         end
     }
 
@@ -87,16 +82,6 @@ local packer_startup = function(use)
                         ["gr"] = { "<cmd>lua vim.lsp.buf.references()<CR>", "List references" },
                         ["gD"] = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "Goto declaration" },
                         ["<C-k>"] = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "Signature help" },
-                        ["[d"] = { "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", "Prev diagnostic" },
-                        ["]d"] = { "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", "Next diagnostic" },
-                        ["da"] = {
-                            "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>",
-                            "List all diagnostics"
-                        },
-                        ["<leader>e"] = {
-                            "<cmd>lua vim.diagnostic.open_float()<CR>",
-                            "Show line diagnostics"
-                        },
                         ["FF"] = { "<cmd>lua vim.lsp.buf.formatting()<CR>", "Format code" },
                         ["<leader>D"] = { "<cmd>lua vim.lsp.buf.type_definition()<CR>", "Type definition" },
                         ["<leader>rn"] = { "<cmd>lua vim.lsp.buf.rename()<CR>", "Rename" },
@@ -164,21 +149,6 @@ local packer_startup = function(use)
 
                     nvim_lsp[ls].setup(config)
                 end
-
-                vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-                vim.lsp.diagnostic.on_publish_diagnostics, {
-                    virtual_text = false,
-                    signs = true,
-                    update_in_insert = false,
-                }
-                )
-
-                vim.cmd [[
-                augroup lsp
-                autocmd!
-                autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float({focusable=false})
-                augroup end
-                ]]
             end
         },
     }
@@ -191,7 +161,7 @@ local packer_startup = function(use)
     use {
         'jose-elias-alvarez/null-ls.nvim',
         config = function()
-            local nls = require "null-ls"
+            local nls = require('null-ls')
 
             nls.setup({
                 debounce = 250,
@@ -390,6 +360,7 @@ local packer_startup = function(use)
     use 'chrisbra/unicode.vim'
 
     use { 'preservim/tagbar' }
+    -- use { 'liuchengxu/vista.vim' }
 
     -- Displays a "minimap"-style split display of classes/functions,
     -- but unlike Tagbar (which is unmaintained), these plugins are
@@ -462,7 +433,7 @@ local packer_startup = function(use)
     use { 'terryma/vim-expand-region' }
     -- 多光标选中编辑
     -- multiplecursors
-    use { 'terryma/vim-multiple-cursors' }
+    use { 'mg979/vim-visual-multi' }
 
     use {
         'junegunn/vim-easy-align',
@@ -472,15 +443,37 @@ local packer_startup = function(use)
             xmap ga <Plug>(EasyAlign)
             " Start interactive EasyAlign for a motion/text object (e.g. gaip)
             nmap ga <Plug>(EasyAlign)
+
+            " live interactive mode
+            xmap iga <Plug>(LiveEasyAlign)
+            nmap iga <Plug>(LiveEasyAlign)
             ]]
         end
     }
     -- 快速加入修改环绕字符
-    use { 'wellle/targets.vim', 'tpope/vim-surround', 'tpope/vim-repeat', 'mg979/vim-visual-multi' }
+    use { 'wellle/targets.vim', 'tpope/vim-surround', 'tpope/vim-repeat'}
     use { 'tpope/vim-abolish' }
+    use { 'windwp/nvim-autopairs' }
 
     -- 显示、删除行尾空格
     use { 'bronson/vim-trailing-whitespace' }
+
+    -- fast left-right movement
+    use {
+        'unblevable/quick-scope',
+        config = function ()
+            vim.cmd [[
+            " Trigger a highlight only when pressing f and F
+            let g:qs_highlight_on_keys = ['f', 'F']
+            let g:qs_max_chars=250
+
+            " Map the leader key + q to toggle quick-scope's highlighting in normal/visual mode.
+            " Note that you must use nmap/xmap instead of their non-recursive versions (nnoremap/xnoremap).
+            nmap <leader>q <plug>(QuickScopeToggle)
+            xmap <leader>q <plug>(QuickScopeToggle)
+            ]]
+        end
+    }
 
     -- 将不同层级的括号用不同颜色显示
     use {
@@ -512,6 +505,7 @@ local packer_startup = function(use)
         'nvim-telescope/telescope.nvim',
         requires = {
             'nvim-lua/plenary.nvim',
+            'folke/persistence.nvim',  -- used by './telescope-sessions.lua'
         },
         config = function ()
             local telescope = require('telescope')
@@ -578,8 +572,6 @@ local packer_startup = function(use)
             })
         end
     }
-
-    use { 'windwp/nvim-autopairs' }
 
     -- Displays an interactive tree of changes to undo
     use { 'mbbill/undotree' }
@@ -809,27 +801,9 @@ local packer_startup = function(use)
     }
 
     use {
-        'TimUntersberger/Neogit', cmd = "Neogit",
-        config = function()
-            require('neogit').setup({
-                integrations = {
-                    diffview = true
-                }
-            })
-        end
-    }
-
-    use {
         'sindrets/diffview.nvim',
         config = function()
             require('diffview').setup()
-        end
-    }
-
-    use {
-        'oberblastmeister/neuron.nvim', branch = "unstable", keys = "gz",
-        config = function()
-            require('neuron').setup()
         end
     }
 
@@ -837,10 +811,8 @@ local packer_startup = function(use)
 
     -- color scheme
     use { 'NLKNguyen/papercolor-theme' }
-    use { 'sainnhe/gruvbox-material' }
-    use { 'altercation/vim-colors-solarized' }
-    use { 'overcache/NeoSolarized' }
-    use { 'Mofiqul/dracula.nvim' }
+    -- use { 'sainnhe/gruvbox-material' }
+    -- use { 'altercation/vim-colors-solarized' }
 end
 
 local packer_config = {

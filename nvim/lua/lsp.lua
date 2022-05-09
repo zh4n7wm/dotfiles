@@ -32,24 +32,8 @@ require "lsp_signature".setup({
   }
 })
 
-local on_attach = function(client, bufnr)
-    require "lsp_signature".on_attach()  -- Note: add in lsp client on-attach
-end
-
+require('lspconfig').pyright.setup{}
 require('lspconfig').gopls.setup{}
-
-require('lspconfig').pyright.setup{
-    handlers = {
-        -- pyright ignores dynamicRegistration settings
-        ['client/registerCapability'] = function(_, _, _, _)
-            return {
-                result = nil;
-                error = nil;
-            }
-        end
-    }
-}
-
 require('lspconfig').tsserver.setup{}
 require('lspconfig').yamlls.setup{}
 require('lspconfig').ansiblels.setup{}

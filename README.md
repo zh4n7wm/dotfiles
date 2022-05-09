@@ -1,6 +1,9 @@
 ## git
 
 ```bash
+brew install git
+brew install diff-so-fancy
+
 ln -s $(pwd)/git/gitconfig ~/.gitconfig
 ```
 
@@ -16,7 +19,7 @@ install fonts
 
 ```bash
 brew tap homebrew/cask-fonts
-brew install font-hack-nerd-font --cask
+brew install --cask font-sauce-code-pro-nerd-font
 ```
 
 install packer as nvim package manager

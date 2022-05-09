@@ -13,14 +13,18 @@ set -x LC_ALL en_US.UTF-8
 set -x GOPATH $HOME/go
 set -x GO111MODULE on
 
+# nodejs
+# https://github.com/tj/n
+set -x N_PREFIX $HOME/.n
+
 # $PATH
 set -e fish_user_paths
 set -gx fish_user_paths \
         $GOPATH/bin \
         $HOME/.cargo/bin \
-        /usr/local/lib/ruby/gems/3.0.0/bin \
+        $N_PREFIX/bin \
+        $HOME/.fzf/bin \
         /usr/local/opt/ruby/bin \
-        /Applications/Postgres.app/Contents/Versions/latest/bin/Applications/Postgres.app/Contents/Versions/latest/bin \
         /usr/local/opt/llvm/bin \
         /usr/local/sbin \
         /usr/local/bin \
@@ -28,7 +32,6 @@ set -gx fish_user_paths \
         /usr/bin \
         /sbin \
         /bin \
-        $HOME/.fzf/bin \
         $fish_user_paths
 
 set -x XDG_CONFIG_HOME $HOME/.config
@@ -44,20 +47,6 @@ function fish_greeting
         fortune -s | lolcat -t
     end
 end
-
-## Rewrite prompt for pyenv (overriding pure-fish/pure)
-#functions -c _pure_prompt_virtualenv _old_pure_prompt_virtualenv
-#function _pure_prompt_virtualenv
-#    if set -q PYENV_VERSION
-#        # https://github.com/pure-fish/pure/blob/master/functions/_pure_prompt_virtualenv.fish
-#        echo -n -s (set_color magenta) "" (basename "$PYENV_VERSION") "" (set_color normal) ""
-#    end
-#    if set -q VIRTUAL_ENV
-#        echo -n -s (set_color magenta) "" (basename "$VIRTUAL_ENV") "" (set_color normal) ""
-#    end
-#end
-#
-#
 
 # vi mode
 if status is-interactive
@@ -79,6 +68,36 @@ end
 
 # bat https://github.com/sharkdp/bat
 set -x BAT_THEME zenburn
+
+# http proxy
+set -x http_proxy "http://localhost:8118" 
+set -x https_proxy $http_proxy
+set -x ftp_proxy $http_proxy
+set -x rsync_proxy $http_proxy
+set -x HTTP_PROXY $http_proxy
+set -x HTTPS_PROXY $http_proxy
+set -x FTP_PROXY $http_proxy
+set -x no_proxy \
+    localhost \
+    localaddress \
+    .localdomain.com \
+    10.0.0.0/8 \
+    127.0.0.0/8 \
+    172.0.0.0/8 \
+    192.0.0.0/8 \
+    .aliyun.com \
+    .taobao.org \
+    .npm.taobao.org \
+    registry.npm.taobao.org \
+    .cnpmjs.org \
+    .tsinghua.edu.cn \
+    .qiniu.com \
+    .goproxy.cn \
+    .sjtug.sjtu.edu.cn \
+    .mirror.aliyuncs.com \
+    .c.163.com \
+    .mirrors.ustc.edu.cn
+set -x NO_PROXY $no_proxy
 
 # Alias
 alias vim "nvim"

@@ -6,7 +6,6 @@ require('basic')
 require('keymap')
 require('plug')
 require('cmpconfig')
--- require('nvim-cmp-config')
 require('lsp')
 require('autocmd')
 require('telescope-files')
@@ -20,24 +19,52 @@ require('lualine').setup{
   }
 }
 
+
+local signs = {
+    Error = " ",
+    Warn  = " ",
+    Hint  = " ",
+    Info  = " "
+}
+for type, icon in pairs(signs) do
+    local hl = "DiagnosticSign" .. type
+    vim.fn.sign_define(hl, {text = icon, texthl = hl, numhl = hl})
+end
+
+-- Do not source the default filetype.vim, using for neovim < 0.6.0
+vim.g.did_load_filetypes = 1
+require('filetype').setup{
+    overrides = {
+        complex = {
+            -- Set the filetype of any full filename matching the regex to gitconfig
+            [".*git/config"] = "gitconfig", -- Included in the plugin
+        },
+        function_literal = {
+            Brewfile = function()
+                vim.cmd("syntax off")
+            end
+        }
+    }
+}
+
+require('trouble').setup{
+    icons = true,
+    signs = {
+        -- icons / text used for a diagnostic
+        error = "",
+        warning = "",
+        hint = "",
+        information = "",
+        other = "﫠"
+    },
+    use_diagnostic_signs = true,
+}
+
+
 vim.cmd [[
 let g:loaded_fzf = 1
 ]]
 require('lspfuzzy').setup{}
-
--- Mappings.
--- See `:help vim.diagnostic.*` for documentation on any of the below functions
-map('n', '<leader>d', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-map('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-map('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-map('n', 'da', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
-
-
-local signs = { Error = "🔥", Warn = "⚠️ ", Hint = "✨", Info = "ℹ️ " }
-for type, icon in pairs(signs) do
-  local hl = "DiagnosticSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
 
 cmd [[
 " enable true color
