@@ -349,7 +349,12 @@ local packer_startup = function(use)
         { 'hrsh7th/cmp-cmdline' },
         { 'hrsh7th/cmp-nvim-lua' },
         { 'ray-x/lsp_signature.nvim'  },
-        { 'rafamadriz/friendly-snippets' },
+        {
+            'rafamadriz/friendly-snippets',
+            config = function ()
+                require("luasnip/loaders/from_vscode").lazy_load()
+            end
+        },
         { 'onsails/lspkind.nvim' }
     }
 
