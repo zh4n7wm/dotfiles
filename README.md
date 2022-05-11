@@ -97,3 +97,13 @@ git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
 ```
 
 press `prefix + I` to install tmux plugins, `prefix + U` to update plugins
+
+## refs
+
+### nvim
+
+- [Everything you need to know to configure neovim using lua](https://vonheikemen.github.io/devlog/tools/configuring-neovim-using-lua/)
+- [Moving to modern Neovim](https://toroid.org/modern-neovim)
+- [nanotee/nvim-lua-guide](https://github.com/nanotee/nvim-lua-guide)
+- [我的命令行开发环境 ❤️](https://writings.sh/post/commandline-tools)
+- [Vim Cheat Sheet](https://vim.rtorr.com/)
