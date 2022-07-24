@@ -17,6 +17,9 @@ set -x GO111MODULE on
 # https://github.com/tj/n
 set -x N_PREFIX $HOME/.n
 
+# pipx
+test -f ~/.config/fish/completions/pipx.fish || register-python-argcomplete --shell fish pipx >~/.config/fish/completions/pipx.fish
+
 # $PATH
 set -e fish_user_paths
 set -gx fish_user_paths \

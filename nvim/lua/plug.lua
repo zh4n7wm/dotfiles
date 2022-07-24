@@ -14,13 +14,16 @@ local packer_startup = function(use)
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
 
-    -- filesystem navigation
-    use { 'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons' }
-
+    -- need to load first
     use {
-        'nvim-lualine/lualine.nvim',
-        requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+        'kyazdani42/nvim-web-devicons',
+        'nathom/filetype.nvim',
     }
+
+    -- filesystem navigation
+    use { 'kyazdani42/nvim-tree.lua' }
+
+    use { 'nvim-lualine/lualine.nvim' }
 
     -- If a file is already open in vim somewhere, just switch to that editor
     -- instead of bothering me with a warning about the swapfile. (Depends on
@@ -42,13 +45,25 @@ local packer_startup = function(use)
 
     use { 'rust-lang/rust.vim', opt = true }
 
-    -- filetype
-    use { 'nathom/filetype.nvim' }
-
+    use {
+        'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
+        config = function()
+            require("lsp_lines").setup()
+            vim.diagnostic.config({
+                virtual_text = false,
+            })
+            vim.keymap.set(
+                "",
+                "<Leader>l",
+                require("lsp_lines").toggle,
+                { desc = "Toggle lsp_lines" }
+            )
+        end,
+    }
     -- show all the trouble your code is causing
     use {
         'folke/trouble.nvim',
-        requires = { "kyazdani42/nvim-web-devicons", "neovim/nvim-lspconfig" },
+        requires = {  "neovim/nvim-lspconfig" },
         config = function ()
             vim.cmd [[
             nnoremap <leader>xx <cmd>TroubleToggle<cr>
@@ -864,8 +879,8 @@ local packer_startup = function(use)
     use 'gpanders/editorconfig.nvim'
 
     -- color scheme
-    use { 'NLKNguyen/papercolor-theme' }
-    -- use { 'sainnhe/gruvbox-material' }
+    -- use { 'NLKNguyen/papercolor-theme' }
+    use { 'sainnhe/gruvbox-material' }
     -- use { 'altercation/vim-colors-solarized' }
 end
 

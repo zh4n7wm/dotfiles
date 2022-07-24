@@ -2,15 +2,19 @@
 
 window:
   # Window dimensions (changes require restart)
+#  dimensions:
+#    columns: 250
+#    lines: 200
   dimensions:
-    columns: 250
-    lines: 200
+    columns: 80
+    lines: 25
   # Window padding (changes require restart)
   padding:
     x: 2
     y: 2
   # Window decorations
-  decorations: full  # full/none/buttonless/transparent
+  # decorations: full  # full/none/buttonless/transparent
+  # startup_mode: Maximized # Maximized/Windowed/Fullscreen
   startup_mode: Maximized # Maximized/Windowed/Fullscreen
 
 scrolling:

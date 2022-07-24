@@ -60,6 +60,15 @@ vim.opt.softtabstop=4
 vim.opt.smarttab=true
 -- 将Tab自动转化成空格[需要输入真正的Tab键时，使用 Ctrl+V + Tab]
 vim.opt.expandtab=true
+vim.cmd [[
+" for html/javascript/lua files, 2 spaces
+autocmd Filetype html setlocal ts=2 sw=2 expandtab
+autocmd Filetype javascript setlocal ts=2 sw=2 expandtab
+autocmd Filetype solidity setlocal ts=2 sw=2 expandtab
+
+" does not expand tabs for Makefile
+autocmd FileType make set noexpandtab
+]]
 
 -- editing text and indent
 vim.g.textwidth = 0

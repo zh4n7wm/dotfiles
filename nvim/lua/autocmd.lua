@@ -48,3 +48,8 @@ vim.api.nvim_create_autocmd(
         command = 'inoremap <silent> <buffer> <C-X>! #!/usr/bin/env<Space><C-R>=&filetype<CR>',
     }
 )
+
+-- eslint
+vim.cmd [[
+    autocmd BufWritePre *.tsx,*.ts,*.jsx,*.js EslintFixAll
+]]

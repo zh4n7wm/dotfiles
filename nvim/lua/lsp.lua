@@ -6,10 +6,12 @@ require("nvim-lsp-installer").setup({
         "gopls",
         "solang",
         "dockerls",
-        "eslint",
         "tsserver",
         "cmake",
+        "html",
         "cssls",
+        "eslint",
+        "tailwindcss",
         "sumneko_lua",
         "sqls",
         "terraformls",
@@ -34,14 +36,17 @@ require "lsp_signature".setup({
 
 require('lspconfig').pyright.setup{}
 require('lspconfig').gopls.setup{}
-require('lspconfig').tsserver.setup{}
 require('lspconfig').yamlls.setup{}
 require('lspconfig').ansiblels.setup{}
 require('lspconfig').dockerls.setup{}
 require('lspconfig').awk_ls.setup{}
 require('lspconfig').bashls.setup{}
-require('lspconfig').cssls.setup{}
 require('lspconfig').html.setup{}
+require('lspconfig').cssls.setup{}
+require('lspconfig').tsserver.setup{}
+require('lspconfig').eslint.setup{}
+require('lspconfig').tailwindcss.setup{}
+require('lspconfig').terraformls.setup{}
 require('lspconfig').solidity_ls.setup{
     -- [root_dir] = {"**", ".git", "package.json"},
 }

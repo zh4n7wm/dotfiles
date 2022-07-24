@@ -76,6 +76,7 @@ install plugins
 ```bash
 fisher install pure-fish/pure
 fisher install jethrokuan/z
+fisher install oh-my-fish/plugin-aws
 ```
 
 ```bash

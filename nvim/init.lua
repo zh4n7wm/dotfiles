@@ -77,26 +77,17 @@ syntax enable
 set background=dark
 " set background=light
 
-colorscheme PaperColor
+" colorscheme PaperColor
 
-" let g:gruvbox_material_palette = 'material'
-" let g:gruvbox_material_background = 'soft'
-" let g:gruvbox_material_better_performance = 1
-" colorscheme gruvbox-material
+let g:gruvbox_material_palette = 'material'
+let g:gruvbox_material_background = 'soft'
+let g:gruvbox_material_better_performance = 1
+colorscheme gruvbox-material
 
 " colorscheme dracula
 
 " colorscheme solarized
 " let g:solarized_termcolors=256
-
-" colorscheme NeoSolarized
-" let g:neosolarized_contrast = "normal"
-" let g:neosolarized_visibility = "normal"
-" let g:neosolarized_vertSplitBgTrans = 1
-" let g:neosolarized_bold = 1
-" let g:neosolarized_underline = 1
-" let g:neosolarized_italic = 1
-" let g:neosolarized_termBoldAsBright = 1
 ]]
 
 -- undotree
