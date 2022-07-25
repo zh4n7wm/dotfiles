@@ -49,6 +49,14 @@ alias view='nvim -R'
 export EDITOR=nvim
 ```
 
+install programs used by neovim
+
+```
+npm install -g prettier prettier-plugin-solidity
+
+go install mvdan.cc/sh/v3/cmd/shfmt@latest
+```
+
 ## alacritty
 
 ```bash

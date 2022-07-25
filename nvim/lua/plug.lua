@@ -76,6 +76,27 @@ local packer_startup = function(use)
         end
     }
 
+    use {
+        'sbdchd/neoformat',
+        config = function()
+            vim.cmd [[
+                augroup fmt
+                    autocmd!
+                    autocmd BufWritePre * undojoin | Neoformat
+                augroup END
+
+                autocmd FileType javascript setlocal formatprg=prettier\ --single-quote\ --no-semi\ --trailing-comma\ es5
+
+                " Use formatprg when available
+                " let g:neoformat_try_formatprg = 1
+                let g:neoformat_basic_format_align = 1
+                let g:neoformat_basic_format_trim = 1
+
+                nnoremap gp :silent %!prettier --single-quote --no-semi --trailing-comma es5 --stdin-filepath %<CR>
+            ]]
+        end,
+    }
+
     -- configure LSP
     use {
         { 'williamboman/nvim-lsp-installer' },
