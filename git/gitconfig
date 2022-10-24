@@ -1,69 +1,69 @@
 [http]
-	proxy = http://localhost:8118
+    # proxy = http://localhost:8118
 
 [user]
-	name = zhangwm404
-	email = 442798+zhangwm404@users.noreply.github.com
+    name = zhangwm404
+    email = 442798+zhangwm404@users.noreply.github.com
 
 [pull]
-	rebase = true
+    rebase = true
 
-[url "ssh://git@github.com/"]
-	insteadOf = https://github.com/
+[url "git@github.com:"]
+    insteadOf = https://github.com/
 
 [merge]
-	tool = vimdiff
-	# Include summaries of merged commits in newly created merge commit messages
-	log = true
+    tool = vimdiff
+    # Include summaries of merged commits in newly created merge commit messages
+    log = true
 
 [diff]
-	tool = vimdiff
+    tool = vimdiff
 
 [difftool "vimdiff"]
-	cmd = vimdiff -b \"$LOCAL\" \"$REMOTE\"
+    cmd = vimdiff -b \"$LOCAL\" \"$REMOTE\"
 
 [core]
-	editor = nvim
+    editor = nvim
     # pager = diff-so-fancy | less --tabs=4 -RFX
-	excludesfile = ~/.gitignore
-	ignorecase = false
+    excludesfile = ~/.gitignore
+    ignorecase = false
 
 [color]
-	ui = true
-	diff = auto
-	status = auto
-	branch = auto
+    ui = true
+    diff = auto
+    status = auto
+    branch = auto
 
 [alias]
-	st = status
-	cm = commit
-	ad = add .
-	diff-last-tag = !git log `git describe --tags --abbrev=0`..HEAD --oneline
+    st = status
+    cm = commit
+    ad = add .
+    diff-last-tag = !git log `git describe --tags --abbrev=0`..HEAD --oneline
 
 [push]
-	default = matching
+    default = matching
 
 [rerere]
-	enabled = 1
-	autoupdate = 1
+    enabled = 1
+    autoupdate = 1
 
 [color "diff-highlight"]
-	oldNormal = red bold
-	oldHighlight = red bold 52
-	newNormal = green bold
-	newHighlight = green bold 22
+    oldNormal = red bold
+    oldHighlight = red bold 52
+    newNormal = green bold
+    newHighlight = green bold 22
 
 [color "diff"]
-	meta = 11
-	frag = magenta bold
-	commit = yellow bold
-	old = red bold
-	new = green bold
-	whitespace = red reverse
-	func = 146 bold
+    meta = 11
+    frag = magenta bold
+    commit = yellow bold
+    old = red bold
+    new = green bold
+    whitespace = red reverse
+    func = 146 bold
 
 [init]
-	defaultBranch = master
+    defaultBranch = master
 
 [interactive]
-	diffFilter = diff-so-fancy --patch
+    diffFilter = diff-so-fancy --patch
