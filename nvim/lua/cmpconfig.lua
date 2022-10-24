@@ -89,7 +89,7 @@ lspconfig.util.default_config = vim.tbl_extend(
   lspconfig.util.default_config,
   {
     -- Required by nvim-cmp
-    capabilities = cmp_nvim_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+    capabilities = cmp_nvim_lsp.default_capabilities(vim.lsp.protocol.make_client_capabilities()),
 
     -- Init signature plugin on_attach
     on_attach = function ()

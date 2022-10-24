@@ -5,7 +5,6 @@ require("nvim-lsp-installer").setup({
         "pyright",
         "gopls",
         "solang",
-        "dockerls",
         "tsserver",
         "cmake",
         "html",
@@ -36,9 +35,7 @@ require "lsp_signature".setup({
 
 require('lspconfig').pyright.setup{}
 require('lspconfig').gopls.setup{}
-require('lspconfig').yamlls.setup{}
 require('lspconfig').ansiblels.setup{}
-require('lspconfig').dockerls.setup{}
 require('lspconfig').awk_ls.setup{}
 require('lspconfig').bashls.setup{}
 require('lspconfig').html.setup{}

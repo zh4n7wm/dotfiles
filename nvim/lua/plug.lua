@@ -145,7 +145,7 @@ local packer_startup = function(use)
                     }, { mode = "v", buffer = bufnr })
                 end
 
-                local capabilities = require('cmp_nvim_lsp').update_capabilities(
+                local capabilities = require('cmp_nvim_lsp').default_capabilities(
                 vim.lsp.protocol.make_client_capabilities()
                 )
 
@@ -430,7 +430,7 @@ local packer_startup = function(use)
     }
 
     use {
-        "akinsho/toggleterm.nvim", tag = 'v1.*',
+        "akinsho/toggleterm.nvim",
         config = function()
             require("toggleterm").setup()
         end
