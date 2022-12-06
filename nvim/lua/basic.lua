@@ -1,3 +1,4 @@
+vim.opt.mouse=nil
 vim.opt.encoding='utf-8'
 -- 自动判断编码时，依次尝试以下编码：
 vim.opt.fileencodings='ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1'

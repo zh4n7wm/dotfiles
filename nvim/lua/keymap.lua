@@ -21,6 +21,9 @@ map <Right> <Nop>
 map <Up> <Nop>
 map <Down> <Nop>
 
+" 禁用macro recording
+map q <Nop>
+
 "Treat long lines as break lines (useful when moving around in them)
 " se swap之后，同物理行上线直接跳
 nnoremap k gk
