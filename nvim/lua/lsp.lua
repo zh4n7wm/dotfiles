@@ -1,4 +1,5 @@
-require("nvim-lsp-installer").setup({
+require("mason").setup()
+require("mason-lspconfig").setup({
     ensure_installed = {
         "clangd",
         "bashls",
@@ -14,17 +15,15 @@ require("nvim-lsp-installer").setup({
         "sumneko_lua",
         "sqls",
         "terraformls",
+        "tflint",
         "yamlls",
-    }, -- ensure these servers are always installed
-    automatic_installation = true, -- automatically detect which servers to install (based on which servers are set up via lspconfig)
-    ui = {
-        icons = {
-            server_installed = "✓",
-            server_pending = "➜",
-            server_uninstalled = "✗"
-        }
-    }
+        "jsonls",
+        "dockerls",
+        "rust_analyzer",
+    },
+    automatic_installation = false,
 })
+
 
 require "lsp_signature".setup({
   bind = true, -- This is mandatory, otherwise border config won't get registered.
@@ -44,6 +43,7 @@ require('lspconfig').tsserver.setup{}
 require('lspconfig').eslint.setup{}
 require('lspconfig').tailwindcss.setup{}
 require('lspconfig').terraformls.setup{}
+require('lspconfig').tflint.setup{}
 require('lspconfig').solidity_ls.setup{
     -- [root_dir] = {"**", ".git", "package.json"},
 }

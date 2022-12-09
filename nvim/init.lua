@@ -120,3 +120,12 @@ require('which-key').register({
     h = { "<cmd>Telescope help_tags<CR>", "Help tags" },
   },
 })
+
+-- terraform
+cmd([[silent! autocmd! filetypedetect BufRead,BufNewFile *.tf]])
+cmd([[autocmd BufRead,BufNewFile *.hcl set filetype=hcl]])
+cmd([[autocmd BufRead,BufNewFile .terraformrc,terraform.rc set filetype=hcl]])
+cmd([[autocmd BufRead,BufNewFile *.tf,*.tfvars set filetype=terraform]])
+cmd([[autocmd BufRead,BufNewFile *.tfstate,*.tfstate.backup set filetype=json]])
+cmd([[let g:terraform_fmt_on_save=1]])
+cmd([[let g:terraform_align=1]])

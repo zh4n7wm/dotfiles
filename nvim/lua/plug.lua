@@ -99,94 +99,9 @@ local packer_startup = function(use)
 
     -- configure LSP
     use {
-        { 'williamboman/nvim-lsp-installer' },
-        {
-            'neovim/nvim-lspconfig',
-            config = function ()
-                local nvim_lsp = require('lspconfig')
-                -- Define buffer-local mappings and options to access LSP
-                -- functionality after the language server and buffer are
-                -- attached.
-                local on_attach = function(client, bufnr)
-                    local function buf_setopt(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-
-                    buf_setopt('omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-                    require('which-key').register({
-                        ["K"] = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Hover text" },
-                        ["gd"] = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Goto definition" },
-                        ["gr"] = { "<cmd>lua vim.lsp.buf.references()<CR>", "List references" },
-                        ["gD"] = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "Goto declaration" },
-                        ["<C-k>"] = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "Signature help" },
-                        ["FF"] = { "<cmd>lua vim.lsp.buf.formatting()<CR>", "Format code" },
-                        ["<leader>D"] = { "<cmd>lua vim.lsp.buf.type_definition()<CR>", "Type definition" },
-                        ["<leader>rn"] = { "<cmd>lua vim.lsp.buf.rename()<CR>", "Rename" },
-                        ["<leader>ca"] = { '<cmd>lua vim.lsp.buf.code_action()<CR>', "Code action" },
-                        ["\\W"] = {
-                            name = "+Workspaces",
-                            l = {
-                                "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>",
-                                "List workspace directories"
-                            },
-                            a = {
-                                "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>",
-                                "Add workspace directory"
-                            },
-                            r = {
-                                "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>",
-                                "Remove workspace directory"
-                            },
-                        },
-                    }, { buffer = bufnr })
-
-                    require('which-key').register({
-                        ["FF"] = { "<cmd>lua vim.lsp.buf.formatting()<CR>", "Format code" },
-                        ["<leader>ca"] = { '<cmd>lua vim.lsp.buf.code_action()<CR>', "Code action" },
-                    }, { mode = "v", buffer = bufnr })
-                end
-
-                local capabilities = require('cmp_nvim_lsp').default_capabilities(
-                vim.lsp.protocol.make_client_capabilities()
-                )
-
-                local servers = {
-                    clangd = {}, gopls = {}, pyright = {}, bashls = {},
-                    jsonls = {}, cssls = {}, html = {}, sqls = {},
-                }
-
-                for ls, overrides in pairs(servers) do
-                    local config = {
-                        capabilities = capabilities,
-                        on_attach = on_attach,
-                        flags = {
-                            debounce_text_changes = 500,
-                        },
-                        root_dir = function(fname)
-                            local util = require('lspconfig.util')
-                            local root_files = {
-                                '.git', '.vimrc', 'setup.py', 'setup.cfg',
-                                'pyrightconfig.json', 'pyproject.toml',
-                                'requirements.txt', 'go.mod',
-                                'package.json', 'compile_commands.json',
-                                'Jamfile', 'Makefile', 'compile_flags.txt',
-                            }
-                            local root = util.root_pattern(unpack(root_files))(fname) or util.path.dirname(fname)
-                            local bits = vim.split(root, '/')
-                            if root == vim.loop.os_homedir() or bits[2] ~= "home" or #bits < 5 then
-                                root = nil
-                            end
-                            return root
-                        end
-                    }
-
-                    for k,v in pairs(overrides) do
-                        config[k] = v
-                    end
-
-                    nvim_lsp[ls].setup(config)
-                end
-            end
-        },
+        'williamboman/mason.nvim',
+        'williamboman/mason-lspconfig.nvim',
+        'neovim/nvim-lspconfig',
     }
 
     -- A language server that integrates with external tools like black
@@ -294,7 +209,7 @@ local packer_startup = function(use)
                     "lua", "make", "markdown", "ninja", "nix", "norg", "perl",
                     "php", "python", "r", "regex", "rst", "ruby", "rust", "scala",
                     "scheme", "scss", "svelte", "tlaplus", "toml", "typescript",
-                    "vim", "vue", "yaml"
+                    "vim", "vue", "yaml", "hcl",
                 },
                 context_commentstring = {
                     enable = true,
