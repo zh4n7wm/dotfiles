@@ -16,12 +16,12 @@ local packer_startup = function(use)
 
     -- need to load first
     use {
-        'kyazdani42/nvim-web-devicons',
+        'nvim-tree/nvim-web-devicons',
         'nathom/filetype.nvim',
     }
 
     -- filesystem navigation
-    use { 'kyazdani42/nvim-tree.lua' }
+    use { 'nvim-tree/nvim-tree.lua' }
 
     use { 'nvim-lualine/lualine.nvim' }
 
@@ -102,6 +102,8 @@ local packer_startup = function(use)
         'williamboman/mason.nvim',
         'williamboman/mason-lspconfig.nvim',
         'neovim/nvim-lspconfig',
+        'jay-babu/mason-null-ls.nvim',
+        'jay-babu/mason-nvim-dap.nvim',
     }
 
     -- A language server that integrates with external tools like black
@@ -354,8 +356,6 @@ local packer_startup = function(use)
     -- 自动补全单引号，双引号等
     use { 'Raimondi/delimitMate' }
 
-    -- text object
-    use { 'kana/vim-textobj-user', 'kana/vim-textobj-line', 'kana/vim-textobj-entire', 'kana/vim-textobj-indent'}
     use { 'machakann/vim-highlightedyank' }
 
     -- Snippet Engine + Presets
@@ -444,14 +444,13 @@ local packer_startup = function(use)
 
     -- find/filter
     use {
+        '/usr/local/opt/fzf', -- install fzf via brew
         'junegunn/fzf.vim',
-        requires={ {'junegunn/fzf', cmd = 'fzf#install()'}, }
     }
     use {
         'ojroques/nvim-lspfuzzy',
         requires = {
-            {'junegunn/fzf'},
-            {'junegunn/fzf.vim'},  -- to enable preview (optional)
+            'junegunn/fzf.vim',  -- to enable preview (optional)
         },
     }
 

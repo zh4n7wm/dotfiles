@@ -1,4 +1,8 @@
 require("mason").setup()
+require("mason-nvim-dap").setup({
+    ensure_installed = { "python", "delve" },
+    automatic_setup = true,
+})
 require("mason-lspconfig").setup({
     ensure_installed = {
         "clangd",
@@ -22,6 +26,9 @@ require("mason-lspconfig").setup({
         "rust_analyzer",
     },
     automatic_installation = false,
+    flags = {
+        debounce_text_changes = 150,
+    }
 })
 
 

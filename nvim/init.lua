@@ -1,6 +1,4 @@
-local map = vim.api.nvim_set_keymap
 local cmd = vim.cmd
-local opts = { noremap=true, silent=true }
 
 require('basic')
 require('keymap')
@@ -60,9 +58,13 @@ require('trouble').setup{
     use_diagnostic_signs = true,
 }
 
-
+-- fzf
 vim.cmd [[
-let g:loaded_fzf = 1
+let $FZF_DEFAULT_OPTS = "--delimiter ':' --preview-window '+{2}-20'"
+
+function! LcnFzfSelectionUI(source, sink) abort
+    return fzf#run(fzf#wrap(fzf#vim#with_preview({'source': a:source, 'sink': a:sink})))
+endfunction
 ]]
 require('lspfuzzy').setup{}
 

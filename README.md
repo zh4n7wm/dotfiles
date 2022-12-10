@@ -12,15 +12,20 @@ ln -s $(pwd)/git/gitconfig ~/.gitconfig
 install neovim
 
 ```bash
-brew install neovim
+brew install neovim fzf bat the_silver_searcher ripgrep
 ```
 
 install fonts
 
 ```bash
 brew tap homebrew/cask-fonts
-brew install --cask font-sauce-code-pro-nerd-font
+brew install font-source-code-pro font-sauce-code-pro-nerd-font
 ```
+
+setup `iTerm2`：iTerm2 -> Profiles -> Default -> Text:
+
+- Font: Source Code Pro for Powerline
+- Non-ASCII Font: SauceCodePro Nerd Font
 
 install packer as nvim package manager
 
