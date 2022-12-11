@@ -401,8 +401,8 @@ local packer_startup = function(use)
             nmap ga <Plug>(EasyAlign)
 
             " live interactive mode
-            xmap iga <Plug>(LiveEasyAlign)
-            nmap iga <Plug>(LiveEasyAlign)
+            " xmap iga <Plug>(LiveEasyAlign)
+            " nmap iga <Plug>(LiveEasyAlign)
             ]]
         end
     }
