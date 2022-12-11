@@ -9,6 +9,7 @@ require("mason-lspconfig").setup({
         "bashls",
         "pyright",
         "gopls",
+        "vimls",
         "solang",
         "tsserver",
         "cmake",
@@ -41,6 +42,7 @@ require "lsp_signature".setup({
 
 require('lspconfig').pyright.setup{}
 require('lspconfig').gopls.setup{}
+require('lspconfig').vimls.setup{}
 require('lspconfig').ansiblels.setup{}
 require('lspconfig').awk_ls.setup{}
 require('lspconfig').bashls.setup{}
