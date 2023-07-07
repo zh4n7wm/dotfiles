@@ -1,8 +1,8 @@
 local cmd = vim.cmd
 
+require('plug')
 require('basic')
 require('keymap')
-require('plug')
 require('cmpconfig')
 require('lsp')
 require('autocmd')
@@ -108,21 +108,6 @@ if has("persistent_undo")
 endif
 ]]
 
--- which-key
-require('which-key').register({
-  ["<C-f>"] = {
-    "<cmd>lua require('telescope-files').project_files()<CR>",
-    "Find files",
-  },
-  ["<C-b>"] = { "<cmd>Telescope buffers<CR>", "Buffers" },
-  ["<C-g>"] = { "<cmd>Telescope live_grep<CR>", "Live grep" },
-  ["<C-t>"] = {
-    name = "+Telescope",
-    ["<C-t>"] = { "<cmd>Telescope builtin<CR>", "Builtins" },
-    h = { "<cmd>Telescope help_tags<CR>", "Help tags" },
-  },
-})
-
 -- terraform
 cmd([[silent! autocmd! filetypedetect BufRead,BufNewFile *.tf]])
 cmd([[autocmd BufRead,BufNewFile *.hcl set filetype=hcl]])
@@ -131,3 +116,10 @@ cmd([[autocmd BufRead,BufNewFile *.tf,*.tfvars set filetype=terraform]])
 cmd([[autocmd BufRead,BufNewFile *.tfstate,*.tfstate.backup set filetype=json]])
 cmd([[let g:terraform_fmt_on_save=1]])
 cmd([[let g:terraform_align=1]])
+
+-- astro
+vim.filetype.add({
+    extension = {
+        astro = "astro"
+    },
+})

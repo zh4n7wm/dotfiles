@@ -102,8 +102,7 @@ vnoremap > >gv
 " y$ -> Y Make Y behave like other capitals
 map Y y$
 
-" y$ -> Y Make Y behave like other capitals
-map Y y$
+map C c$
 
 " 复制选中区到系统剪切板中
 vnoremap <leader>y "+y
@@ -158,3 +157,39 @@ map("n", "<leader>t", ":NvimTreeToggle<cr>" ,{silent = true, noremap = true})
 map("n", "<leader>tb", ":TagbarToggle<cr>" ,{silent = true, noremap = true})
 -- telescope
 map("n", "<leader>ff", ":Telescope find_files<cr>" ,{silent = true, noremap = true})
+
+-- which-key
+require('which-key').register({
+    ga = { "<Plug>(UnicodeGA)", "Identify character" },
+    ["\\R"] = { "<cmd>NvimTreeToggle<CR>", "NvimTreeToggle" },
+    ["\\M"] = { "<cmd>SymbolsOutline<CR>", "Symbols" },
+    ["\\U"] = { "<cmd>UndotreeToggle<CR>", "Undotree" },
+    ["\\S"] = {
+        name = "+Sourcetrail",
+        r = { "<cmd>SourcetrailRefresh<CR>", "Start/refresh connection" },
+        a = { "<cmd>SourcetrailActivateToken<CR>", "Activate current token" },
+    },
+})
+
+
+require('which-key').register({
+    ["[c"] = { "Prev hunk" },
+    ["]c"] = { "Next hunk" },
+    ["<leader>h"] = {
+        name = "+Hunk",
+        s = { "Stage hunk" },
+        u = { "Unstage hunk" },
+        r = { "Reset hunk" },
+        R = { "Reset buffer" },
+        p = { "Preview hunk" },
+        b = { "Blame line" },
+    },
+}, { mode = "n" })
+
+require('which-key').register({
+    ["<leader>h"] = {
+        name = "+Hunk",
+        s = { "Stage hunk" },
+        r = { "Reset hunk" },
+    },
+}, { mode = "v" })

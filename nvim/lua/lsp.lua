@@ -5,6 +5,7 @@ require("mason-nvim-dap").setup({
 })
 require("mason-lspconfig").setup({
     ensure_installed = {
+        "astro",
         "clangd",
         "bashls",
         "pyright",
@@ -17,11 +18,10 @@ require("mason-lspconfig").setup({
         "cssls",
         "eslint",
         "tailwindcss",
-        "sumneko_lua",
-        "sqls",
+        "lua_ls",
+        "sqlls",
         "terraformls",
         "tflint",
-        "yamlls",
         "jsonls",
         "dockerls",
         "rust_analyzer",
@@ -40,6 +40,8 @@ require "lsp_signature".setup({
   }
 })
 
+require('lspconfig').kotlin_language_server.setup{}
+require('lspconfig').astro.setup{}
 require('lspconfig').pyright.setup{}
 require('lspconfig').gopls.setup{}
 require('lspconfig').vimls.setup{}
@@ -56,7 +58,7 @@ require('lspconfig').tflint.setup{}
 require('lspconfig').solidity_ls.setup{
     -- [root_dir] = {"**", ".git", "package.json"},
 }
-require('lspconfig').sumneko_lua.setup{
+require('lspconfig').lua_ls.setup{
     settings = {
         Lua = {
             diagnostics = {

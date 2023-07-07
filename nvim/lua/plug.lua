@@ -39,7 +39,6 @@ local packer_startup = function(use)
         ft = 'go',
         setup = function()
             -- Read the following section and add what you need
-            vim.g.go_fmt_autosave = 1
         end
     }
 
@@ -128,17 +127,6 @@ local packer_startup = function(use)
         end,
     }
 
-    use {
-        'nanotee/sqls.nvim',
-        config = function()
-            -- config file: $HOME/sqls/config.yml
-            require('lspconfig').sqls.setup{
-                on_attach = function(client, bufnr)
-                    require('sqls').on_attach(client, bufnr)
-                end
-            }
-        end
-    }
     -- LSP Status Bar
     use { "nvim-lua/lsp-status.nvim" }
 
@@ -154,20 +142,10 @@ local packer_startup = function(use)
     -- indent line
     use { 'lukas-reineke/indent-blankline.nvim'}
 
-    -- Defines gcc/gc{motion}/gC{motion} mappings to toggle comments on the
-    -- current line or selected lines based on the 'commentstring' setting.
     use {
-        'b3nj5m1n/kommentary',
+        'numToStr/Comment.nvim',
         config = function()
-            require('kommentary.config').configure_language({"default", "html", "vim"}, {
-                ignore_whitespace = false,
-                use_consistent_indentation = true,
-                single_line_comment_string = 'auto',
-                multi_line_comment_strings = 'auto',
-                hook_function = function()
-                    require('ts_context_commentstring.internal').update_commentstring()
-                end
-            })
+            require('Comment').setup()
         end
     }
 
@@ -211,7 +189,7 @@ local packer_startup = function(use)
                     "lua", "make", "markdown", "ninja", "nix", "norg", "perl",
                     "php", "python", "r", "regex", "rst", "ruby", "rust", "scala",
                     "scheme", "scss", "svelte", "tlaplus", "toml", "typescript",
-                    "vim", "vue", "yaml", "hcl",
+                    "vim", "vue", "yaml", "hcl", "astro",
                 },
                 context_commentstring = {
                     enable = true,
@@ -325,6 +303,25 @@ local packer_startup = function(use)
     -- based on LSP symbols.
     use {
         'simrat39/symbols-outline.nvim', cmd = "SymbolsOutline"
+    }
+
+    -- Unlike NERDTree and NvimTree, Rnvimr uses RPC to communicate with
+    -- Ranger, thus inheriting all of its file management functionality.
+    use {
+        'kevinhwang91/rnvimr', cmd = "RnvimrToggle"
+    }
+
+    -- github
+    use {
+        'pwntester/octo.nvim',
+        requires = {
+            'nvim-lua/plenary.nvim',
+            'nvim-telescope/telescope.nvim',
+            'nvim-tree/nvim-web-devicons',
+        },
+        config = function ()
+            require"octo".setup()
+        end
     }
 
     -- sudo read/write
@@ -461,6 +458,7 @@ local packer_startup = function(use)
         requires = {
             'nvim-lua/plenary.nvim',
             'folke/persistence.nvim',  -- used by './telescope-sessions.lua'
+            '/usr/local/bin/fd', -- fd
         },
         config = function ()
             local telescope = require('telescope')
@@ -497,9 +495,9 @@ local packer_startup = function(use)
                     "<cmd>lua require('telescope.builtin').live_grep({sorter=require('telescope.sorters').empty()})<CR>",
                     "Live grep"
                 },
-                ["T"] = {
+                ["C-t"] = {
                     name = "+Telescope",
-                    ["T"] = { "<cmd>lua require('telescope.builtin').builtin()<CR>", "Builtins" },
+                    ["C-t"] = { "<cmd>lua require('telescope.builtin').builtin()<CR>", "Builtins" },
                     h = { "<cmd>lua require('telescope.builtin').help_tags()<CR>", "Help tags" },
                 },
             })
@@ -586,18 +584,6 @@ local packer_startup = function(use)
         'CoatiSoftware/vim-sourcetrail', keys = "\\S"
     }
 
-    require('which-key').register({
-        ga = { "<Plug>(UnicodeGA)", "Identify character" },
-        ["\\R"] = { "<cmd>NvimTreeToggle<CR>", "NvimTreeToggle" },
-        ["\\M"] = { "<cmd>SymbolsOutline<CR>", "Symbols" },
-        ["\\U"] = { "<cmd>UndotreeToggle<CR>", "Undotree" },
-        ["\\S"] = {
-            name = "+Sourcetrail",
-            r = { "<cmd>SourcetrailRefresh<CR>", "Start/refresh connection" },
-            a = { "<cmd>SourcetrailActivateToken<CR>", "Activate current token" },
-        },
-    })
-
     -- Fugitive provides a lightweight alternative to running git commands with
     -- `:!git …`, with better output handling and nice buffer integration where
     -- appropriate.
@@ -622,27 +608,6 @@ local packer_startup = function(use)
             require('gitsigns').setup()
         end
     }
-
-    require('which-key').register({
-        ["[c"] = { "Prev hunk" },
-        ["]c"] = { "Next hunk" },
-        ["<leader>h"] = {
-            name = "+Hunk",
-            s = { "Stage hunk" },
-            u = { "Unstage hunk" },
-            r = { "Reset hunk" },
-            R = { "Reset buffer" },
-            p = { "Preview hunk" },
-            b = { "Blame line" },
-        },
-    }, { mode = "n" })
-    require('which-key').register({
-        ["<leader>h"] = {
-            name = "+Hunk",
-            s = { "Stage hunk" },
-            r = { "Reset hunk" },
-        },
-    }, { mode = "v" })
 
     -- debugging system for vim
     -- use { 'puremourning/vimspector' }
@@ -817,6 +782,15 @@ local packer_startup = function(use)
     -- use { 'NLKNguyen/papercolor-theme' }
     use { 'sainnhe/gruvbox-material' }
     -- use { 'altercation/vim-colors-solarized' }
+
+    -- time tracker
+    use { 'wakatime/vim-wakatime' }
+
+    -- lint
+    use { 'mfussenegger/nvim-lint' }
+
+    -- codeium
+    -- use { 'Exafunction/codeium.vim' }
 end
 
 local packer_config = {

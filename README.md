@@ -12,7 +12,7 @@ ln -s $(pwd)/git/gitconfig ~/.gitconfig
 install neovim
 
 ```bash
-brew install neovim fzf bat the_silver_searcher ripgrep
+brew install neovim fzf bat the_silver_searcher ripgrep fd
 ```
 
 install fonts

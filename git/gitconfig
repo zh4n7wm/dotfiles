@@ -1,5 +1,11 @@
-[http]
+[https "https://github.com"]
+    # proxy = socks5h://10.10.1.1:1080
     # proxy = http://localhost:8118
+    proxy = http://localhost:7890
+[http "https://github.com"]
+    # proxy = socks5h://10.10.1.1:1080
+    # proxy = http://localhost:8118
+    proxy = http://localhost:7890
 
 [user]
     name = zhangwm404
@@ -67,3 +73,8 @@
 
 [interactive]
     diffFilter = diff-so-fancy --patch
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
