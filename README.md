@@ -62,6 +62,13 @@ npm install -g prettier prettier-plugin-solidity
 go install mvdan.cc/sh/v3/cmd/shfmt@latest
 ```
 
+## wezterm
+
+```bash
+brew install wezterm
+ln -s $(pwd)/wezterm ~/.config/wezterm
+```
+
 ## alacritty
 
 ```bash
