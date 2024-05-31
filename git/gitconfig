@@ -1,11 +1,13 @@
-[https "https://github.com"]
-    # proxy = socks5h://10.10.1.1:1080
-    # proxy = http://localhost:8118
+[http]
     proxy = http://localhost:7890
+    sslVerify = false
 [http "https://github.com"]
     # proxy = socks5h://10.10.1.1:1080
     # proxy = http://localhost:8118
-    proxy = http://localhost:7890
+    # proxy = http://localhost:7890
+    proxy = socks5h://localhost:7890
+[https]
+    proxy = http://127.0.0.1:7890
 
 [user]
     name = zhangwm404
@@ -14,8 +16,8 @@
 [pull]
     rebase = true
 
-[url "git@github.com:"]
-    insteadOf = https://github.com/
+#[url "git@github.com:"]
+#    insteadOf = https://github.com/
 
 [merge]
     tool = vimdiff
@@ -69,12 +71,16 @@
     func = 146 bold
 
 [init]
-    defaultBranch = master
+    defaultBranch = main
 
 [interactive]
     diffFilter = diff-so-fancy --patch
 [filter "lfs"]
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
-	clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+    clean = git-lfs clean -- %f
+[safe]
+	directory = /opt/dnsmasq-china-list
+	directory = /opt/StevenBlack-hosts
+	directory = /opt/StevenBlack-hosts

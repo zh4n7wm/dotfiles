@@ -61,9 +61,11 @@ function fish_greeting
 end
 
 # vi mode
-if status is-interactive
-    set -g fish_key_bindings fish_vi_key_bindings
-end
+#if status is-interactive
+#    set -g fish_key_bindings fish_vi_key_bindings
+#end
+set -g fish_key_bindings fish_vi_key_bindings
+
 
 function reverse_history_search
     history | fzf --no-sort | read -l command
@@ -73,7 +75,7 @@ function reverse_history_search
 end
 
 function fish_user_key_bindings
-    bind -M default / reverse_history_search
+    # bind -M default / reverse_history_search
     # 在编辑器中编辑命令
     bind \ci edit_command_buffer # Ctrl-I
 end
@@ -142,6 +144,7 @@ set -x NO_PROXY $no_proxy
 alias vim nvim
 alias vi nvim
 alias view "nvim -R"
+alias rvim /usr/local/bin/vim
 
 alias ssh "assh wrapper ssh --"
 alias g git
@@ -150,6 +153,9 @@ alias gc "git commit -ev"
 alias sed gsed
 # alias cat bat
 # alias grep ggrep
+
+# python
+source $HOME/.local/share/py3/bin/activate.fish
 
 # k8s
 set -x KUBECONFIG $HOME/.kube/lr.conf
