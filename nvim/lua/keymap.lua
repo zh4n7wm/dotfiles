@@ -72,16 +72,16 @@ map <C-l> <C-W>l
 " http://stackoverflow.com/questions/13194428/is-better-way-to-zoom-windows-in-vim-than-zoomwin
 " Zoom / Restore window.
 function! s:ZoomToggle() abort
-    if exists('t:zoomed') && t:zoomed
-        execute t:zoom_winrestcmd
-        let t:zoomed = 0
-    else
-        let t:zoom_winrestcmd = winrestcmd()
-        resize
-        vertical resize
-        let t:zoomed = 1
-    endif
-endfunction
+if exists('t:zoomed') && t:zoomed
+  execute t:zoom_winrestcmd
+  let t:zoomed = 0
+else
+  let t:zoom_winrestcmd = winrestcmd()
+  resize
+  vertical resize
+  let t:zoomed = 1
+  endif
+  endfunction
 command! ZoomToggle call s:ZoomToggle()
 nnoremap <silent> <Leader>z :ZoomToggle<CR>
 
@@ -152,44 +152,52 @@ map('n', '<C-D>', [[<cmd>call smoothie#do("\<C-D>") <CR>]], {})
 map('n', '<C-U>', [[<cmd>call smoothie#do("\<C-U>") <CR>]], {})
 
 -- nvim-tree
-map("n", "<leader>t", ":NvimTreeToggle<cr>" ,{silent = true, noremap = true})
+map("n", "<leader>t", ":NvimTreeToggle<cr>", { silent = true, noremap = true })
 -- tagbar
-map("n", "<leader>tb", ":TagbarToggle<cr>" ,{silent = true, noremap = true})
+map("n", "<leader>tb", ":TagbarToggle<cr>", { silent = true, noremap = true })
 -- telescope
-map("n", "<leader>ff", ":Telescope find_files<cr>" ,{silent = true, noremap = true})
+map("n", "<leader>ff", ":Telescope find_files<cr>", { silent = true, noremap = true })
+map('n', 'gd', '<cmd>lua require"telescope.builtin".lsp_definitions()<CR>', { noremap = true, silent = true })
+map('n', 'gv', '<cmd>lua require"telescope.builtin".lsp_definitions({jump_type="vsplit"})<CR>',
+  { noremap = true, silent = true })
+map('n', 'gr', '<cmd>lua require"telescope.builtin".lsp_references()<CR>', { noremap = true, silent = true })
+map('n', 'gi', '<cmd>lua require"telescope.builtin".lsp_implementations()<CR>', { noremap = true, silent = true })
+
+-- disable lsp diagnostics
+map("n", "<leader>ud", ":lua vim.diagnostic.disable()<cr>", { silent = true, noremap = true })
 
 -- which-key
 require('which-key').register({
-    ga = { "<Plug>(UnicodeGA)", "Identify character" },
-    ["\\R"] = { "<cmd>NvimTreeToggle<CR>", "NvimTreeToggle" },
-    ["\\M"] = { "<cmd>SymbolsOutline<CR>", "Symbols" },
-    ["\\U"] = { "<cmd>UndotreeToggle<CR>", "Undotree" },
-    ["\\S"] = {
-        name = "+Sourcetrail",
-        r = { "<cmd>SourcetrailRefresh<CR>", "Start/refresh connection" },
-        a = { "<cmd>SourcetrailActivateToken<CR>", "Activate current token" },
-    },
+  ga = { "<Plug>(UnicodeGA)", "Identify character" },
+  ["\\R"] = { "<cmd>NvimTreeToggle<CR>", "NvimTreeToggle" },
+  ["\\M"] = { "<cmd>SymbolsOutline<CR>", "Symbols" },
+  ["\\U"] = { "<cmd>UndotreeToggle<CR>", "Undotree" },
+  ["\\S"] = {
+    name = "+Sourcetrail",
+    r = { "<cmd>SourcetrailRefresh<CR>", "Start/refresh connection" },
+    a = { "<cmd>SourcetrailActivateToken<CR>", "Activate current token" },
+  },
 })
 
 
 require('which-key').register({
-    ["[c"] = { "Prev hunk" },
-    ["]c"] = { "Next hunk" },
-    ["<leader>h"] = {
-        name = "+Hunk",
-        s = { "Stage hunk" },
-        u = { "Unstage hunk" },
-        r = { "Reset hunk" },
-        R = { "Reset buffer" },
-        p = { "Preview hunk" },
-        b = { "Blame line" },
-    },
+  ["[c"] = { "Prev hunk" },
+  ["]c"] = { "Next hunk" },
+  ["<leader>h"] = {
+    name = "+Hunk",
+    s = { "Stage hunk" },
+    u = { "Unstage hunk" },
+    r = { "Reset hunk" },
+    R = { "Reset buffer" },
+    p = { "Preview hunk" },
+    b = { "Blame line" },
+  },
 }, { mode = "n" })
 
 require('which-key').register({
-    ["<leader>h"] = {
-        name = "+Hunk",
-        s = { "Stage hunk" },
-        r = { "Reset hunk" },
-    },
+  ["<leader>h"] = {
+    name = "+Hunk",
+    s = { "Stage hunk" },
+    r = { "Reset hunk" },
+  },
 }, { mode = "v" })

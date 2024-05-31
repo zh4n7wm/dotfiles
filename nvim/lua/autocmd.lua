@@ -1,7 +1,7 @@
 -- go to last location of buffer
 vim.api.nvim_create_autocmd(
-    "BufReadPost",
-    { command = [[if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g`\"" | endif]] }
+  "BufReadPost",
+  { command = [[if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g`\"" | endif]] }
 )
 
 -- show cursor line only in active window
@@ -16,40 +16,40 @@ vim.api.nvim_create_autocmd(
 )
 
 vim.api.nvim_create_autocmd(
-    'FileType',
-    { pattern = '*', command = 'setlocal nolinebreak' }
+  'FileType',
+  { pattern = '*', command = 'setlocal nolinebreak' }
 )
 vim.api.nvim_create_autocmd(
-    'FileType',
-    { pattern = 'json', command = 'set sw=2 et' }
+  'FileType',
+  { pattern = 'json', command = 'set sw=2 et' }
 )
 vim.api.nvim_create_autocmd(
-    'FileType',
-    { pattern = 'xml,xsd,xslt,javascript', command = 'setlocal ts=2' }
+  'FileType',
+  { pattern = 'xml,xsd,xslt,javascript', command = 'setlocal ts=2' }
 )
 vim.api.nvim_create_autocmd(
-    'FileType',
-    { pattern = 'mail,gitcommit', command = 'setlocal tw=72' }
+  'FileType',
+  { pattern = 'mail,gitcommit', command = 'setlocal tw=72' }
 )
 vim.api.nvim_create_autocmd(
-    'FileType',
-    {
-        pattern = 'sh,zsh,csh,tcsh',
-        command = [[
-            setlocal fo-=t
-            inoremap <silent> <buffer> <C-X>! #!/bin/<C-R>=&filetype<CR>
-        ]],
-    }
+  'FileType',
+  {
+    pattern = 'sh,zsh,csh,tcsh',
+    command = [[
+      setlocal fo-=t
+      inoremap <silent> <buffer> <C-X>! #!/bin/<C-R>=&filetype<CR>
+    ]],
+  }
 )
 vim.api.nvim_create_autocmd(
-    'FileType',
-    {
-        pattern = 'perl,python,ruby,tcl',
-        command = 'inoremap <silent> <buffer> <C-X>! #!/usr/bin/env<Space><C-R>=&filetype<CR>',
-    }
+  'FileType',
+  {
+    pattern = 'perl,python,ruby,tcl',
+    command = 'inoremap <silent> <buffer> <C-X>! #!/usr/bin/env<Space><C-R>=&filetype<CR>',
+  }
 )
 
 -- eslint
 vim.cmd [[
-    autocmd BufWritePre *.tsx,*.ts,*.jsx,*.js EslintFixAll
+  autocmd BufWritePre *.tsx,*.ts,*.jsx,*.js EslintFixAll
 ]]
